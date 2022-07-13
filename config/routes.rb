@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'users/new'
+  get 'users/create'
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
+  get 'user/new'
+  get 'user/create'
   namespace :admin do
     get 'categories/new'
     get 'categories/create'
@@ -10,6 +17,13 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
   resources :about, only: [:index]
+  
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
 
   resource :cart, only: [:show] do
     post   :add_item
